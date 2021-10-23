@@ -9,12 +9,44 @@
 <body>
 
 <div class="container">
-  <div class="row">
-    <div class="col-4"></div>
-    <div class="col-4">
-      <form action="" method="post">
+
+
+      <form action="" method="post"><br><br>
     {%csrf_token%}
-    {{form.as_p}}<a href="{%url 'add_address'%}"><button type="button" class="btn btn-sm btn-primary">Add New Address</button></a>
+
+             {% if address %}
+          <div  style="color:white; height:50px; background-color:blue;padding-top:10px;">
+             <h5 style="padding-left:20px">Choose delivery Address</h5>
+          </div><br>
+           {% for ad in address %}
+            <div class="form-check" style="padding-bottom:10px">
+              <label class="form-check-label" for="radio1">
+                <input type="radio" class="form-check-input" id="radio1" name="radioaddress" value={{ad}} checked style="margin-left:20px"><b>{{ad.name}}</b>,<br> {{ad.address_line}}, {{ad.address_line2}}
+              </label>
+            </div>
+           {% endfor %}
+             {% else%}
+                <a href="{%url 'add_address'%}"><button type="button" class="btn btn-sm btn-primary">Add delivery address</button></a>
+             {% endif %}
+          <br><br>
+<!--          {% for i in count %}-->
+<!--             <div class="card" style="width:500px; height:50px">-->
+<!--                 <div class="row">-->
+<!--                     <div class="col-2 ">-->
+<!--                        <img class="card-img-top" src="{{product.image.url}}" alt="Card image" style="height:50px; width:50px">-->
+<!--                     </div>-->
+<!--                     <div class="col-7" >-->
+<!--                        <span  style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 13ch;padding-top:10px; font-family:arial; font-weight:bold" >{{product.product_name}}</span>-->
+<!--                     </div>-->
+<!--                     <div class="col-3">-->
+<!--                        <h6  style="padding-top:15px">{{product.price}}</h6>-->
+<!--                     </div>-->
+<!--                </div>-->
+<!--          {% endfor %}-->
+
+
+        <br><br>
+    <a href="{%url 'add_address'%}"><button type="button" class="btn btn-sm btn-primary">Add New Address</button></a>
     <button type="submit" class="btn btn-success">Place Order</button>
   </form>
     </div>
